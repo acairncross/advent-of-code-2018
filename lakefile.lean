@@ -7,6 +7,5 @@ package «aoc-2018» where
 lean_lib «Aoc2018» where
   -- add library configuration options here
 
-@[default_target]
-lean_exe «aoc-2018» where
-  root := `Main
+lean_exe «day01» where
+  root := `Day01
