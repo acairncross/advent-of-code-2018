@@ -1,16 +1,12 @@
 import Aoc2018
 import Std.Data.HashMap
 
-def parseInput (input : String) : List Int :=
-  input
-  |>.splitOn "\n"
-  |> List.filter (fun (line : String) => line.length != 0)
-  |> List.map (fun (line : String) =>
-    let sign := match String.front line with
-    | '+' => 1
-    | _ => -1
-    let magnitude := (String.drop line 1).toInt!
-    sign * magnitude)
+def parseChange (line : String) : Int :=
+  let sign := match String.front line with
+  | '+' => 1
+  | _ => -1
+  let magnitude := (String.drop line 1).toInt!
+  sign * magnitude
 
 def solvePart1 (changes : List Int) := Id.run do
   let mut frequency : Int := 0
@@ -31,7 +27,8 @@ def solvePart2 (changes : List Int) := Id.run do
   return frequency
 
 def main : IO Unit := do
-  let input <- IO.FS.readFile "inputs/day01.txt"
-  let changes := parseInput input
+  let inputHandle <- IO.FS.Handle.mk "inputs/day01.txt" IO.FS.Mode.read
+  let inputStream := IO.FS.Stream.ofHandle inputHandle
+  let changes := (<- inputStream.readlines).map parseChange
   IO.println s!"{solvePart1 changes}"
   IO.println s!"{solvePart2 changes}"
