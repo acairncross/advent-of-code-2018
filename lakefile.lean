@@ -12,3 +12,6 @@ lean_lib Aoc2018 where
 
 lean_exe day01 where
   root := `Day01
+
+lean_exe day02 where
+  root := `Day02
