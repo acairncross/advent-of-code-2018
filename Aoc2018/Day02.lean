@@ -1,4 +1,4 @@
-import Aoc2018
+import AocLib
 import Std.Data.HashMap
 
 structure TwoersAndThreers where
@@ -37,7 +37,7 @@ def solvePart2 (boxIds : List String) : String := Option.get! do
   failure
 
 def main : IO Unit := do
-  let inputHandle <- IO.FS.Handle.mk "inputs/day02.txt" IO.FS.Mode.read
+  let inputHandle <- IO.FS.Handle.mk "inputs/aoc2018/day02.txt" IO.FS.Mode.read
   let inputStream := IO.FS.Stream.ofHandle inputHandle
   let boxIds <- inputStream.readlines
   IO.println s!"{solvePart1 boxIds}"

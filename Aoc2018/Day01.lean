@@ -1,4 +1,4 @@
-import Aoc2018
+import AocLib
 import Std.Data.HashMap
 
 def parseChange (line : String) : Int :=
@@ -27,7 +27,7 @@ def solvePart2 (changes : List Int) := Id.run do
   return frequency
 
 def main : IO Unit := do
-  let inputHandle <- IO.FS.Handle.mk "inputs/day01.txt" IO.FS.Mode.read
+  let inputHandle <- IO.FS.Handle.mk "inputs/aoc2018/day01.txt" IO.FS.Mode.read
   let inputStream := IO.FS.Stream.ofHandle inputHandle
   let changes := (<- inputStream.readlines).map parseChange
   IO.println s!"{solvePart1 changes}"
