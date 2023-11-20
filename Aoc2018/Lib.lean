@@ -1,4 +1,5 @@
 import Std.Data.Array.Init.Lemmas
+import Mathlib.Data.Vector
 
 namespace IO.FS.Stream
 
@@ -26,3 +27,19 @@ theorem size_append (xs : Array α) (ys : Array α) :
     rw [List.length_append]
 
 end Array
+
+namespace Nat
+
+-- There's a Nat.sum in the std so mirror that
+def product (l : List Nat) : Nat := l.foldr (·*·) 1
+
+end Nat
+
+namespace RankNArray
+
+structure RankNArray (α : Type) (n : Nat) where
+  data : Array α
+  shape : Vector Nat n
+  property : data.size = Nat.product shape.val
+
+end RankNArray
