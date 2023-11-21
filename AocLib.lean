@@ -42,11 +42,23 @@ def product (l : List Nat) : Nat := l.foldr (·*·) 1
 
 end Nat
 
+namespace Vector
+
+-- def foldr
+
+end Vector
+
 namespace RankNArray
 
 structure RankNArray (α : Type) (n : Nat) where
   data : Array α
   shape : Vector Nat n
   property : data.size = Nat.product shape.val
+
+def inBounds (xs : RankNArray α n) (idx : Vector Nat n) : Prop :=
+  (xs.shape.toList.zip idx.toList).all fun (x, i) => i < x
+
+instance : GetElem (RankNArray α n) (Vector Nat n) α inBounds where
+  getElem (xs : RankNArray α n) (idx : Vector Nat n) ok := sorry
 
 end RankNArray
