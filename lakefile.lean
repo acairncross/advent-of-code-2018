@@ -13,6 +13,9 @@ package «advent-of-lean» where
 lean_lib AocLib where
   -- add library configuration options here
 
+lean_exe aoc16day16 where
+  root := `Aoc2016.Day16
+
 lean_exe aoc18day01 where
   root := `Aoc2018.Day01
 

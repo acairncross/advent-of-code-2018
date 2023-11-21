@@ -26,6 +26,12 @@ theorem size_append (xs : Array α) (ys : Array α) :
     rw [Array.append_data]
     rw [List.length_append]
 
+def toChunks (n : Nat) (xs : Array α) : Array (Subarray α) := Id.run do
+  let mut chunks: Array (Subarray α) := Array.empty
+  for i in [:xs.size:n] do
+    chunks := chunks.push (xs.toSubarray (start := i) (stop := i+n))
+  return chunks
+
 end Array
 
 namespace Nat
