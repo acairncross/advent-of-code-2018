@@ -17,7 +17,14 @@ instance : Add Rgb where
 instance : Preorder Rgb where
   le x y := x.red <= y.red && x.green <= y.green && x.blue <= y.blue
   le_refl := by simp
-  le_trans := sorry
+  le_trans := by
+    intro a b c
+    simp
+    intro hred hgreen hblue hred' hgreen' hblue'
+    exact ⟨ ⟨ by apply (le_trans hred hred')
+            , by apply (le_trans hgreen hgreen')
+            ⟩
+          , by apply (le_trans hblue hblue') ⟩
 
 def le (x y : Rgb) : Bool :=
   x.red <= y.red && x.green <= y.green && x.blue <= y.blue
