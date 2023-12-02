@@ -1,5 +1,6 @@
 import Std.Data.Array.Init.Lemmas
 import Mathlib.Data.Vector
+import Lean.Data.Parsec
 
 namespace IO.FS.Stream
 
@@ -17,6 +18,35 @@ end IO.FS.Stream
 -- There isn't a Hashable instance for Char in the stdlib currently
 instance : Hashable Char where
   hash c := c.val.toUInt64
+
+namespace Char
+
+def toInt! (c : Char) : Int :=
+  if c >= '0' && c <= '9' then
+    Int.ofNat (c.toNat - '0'.toNat)
+  else
+    panic "Expected digit"
+
+end Char
+
+namespace Int
+
+def sum (l : List Int) : Int := l.foldr (·+·) 0
+
+def ofDigits (digits : Array Int) : Int :=
+  Array.foldl (fun acc x => 10 * acc + x) 0 digits
+
+end Int
+
+namespace Lean.Parsec
+
+def sepBy1 (p : Parsec α) (sep : Parsec sep) : Parsec (Array α) := do
+  let mut acc : Array α := Array.empty
+  acc := acc.push (<- p)
+  acc <- manyCore (sep *> p) acc
+  return acc
+
+end Lean.Parsec
 
 namespace Array
 
