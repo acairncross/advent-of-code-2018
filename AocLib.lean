@@ -22,7 +22,7 @@ instance : Hashable Char where
 namespace Char
 
 def toInt! (c : Char) : Int :=
-  if c >= '0' && c <= '9' then
+  if c.isDigit then
     Int.ofNat (c.toNat - '0'.toNat)
   else
     panic "Expected digit"

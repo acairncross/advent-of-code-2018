@@ -27,3 +27,6 @@ lean_exe aoc23day01 where
 
 lean_exe aoc23day02 where
   root := `Aoc2023.Day02
+
+lean_exe aoc23day03 where
+  root := `Aoc2023.Day03
