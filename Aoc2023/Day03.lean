@@ -26,7 +26,7 @@ def solvePart1(grid : Array (Array Char)) : Int × Int := Id.run do
                 state := { state with valid := true }
               if c == '*' then
                 state := { state with stars := state.stars.insert ((y+i).toNat, (x+j).toNat) () }
-        dbg_trace state
+        -- dbg_trace state
       else
         if state.valid then
           part_numbers_total := part_numbers_total + Int.ofDigits state.digits
