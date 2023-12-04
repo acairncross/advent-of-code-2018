@@ -10,7 +10,7 @@ instance : ToString ScanState where
   toString
   | { valid, digits, stars } => s!"ScanState \{ valid := {valid}, digits := {digits}, stars := {stars.toArray} }"
 
-def solve(grid : Array (Array Char)) : Int × Int := Id.run do
+def solveParts(grid : Array (Array Char)) : Int × Int := Id.run do
   let mut part_numbers_total : Int := 0
   let mut star_neighbors : Std.HashMap (Nat × Nat) (Array Int):= Std.mkHashMap
   for y in [:grid.size] do
@@ -60,4 +60,4 @@ def main : IO Unit := do
   let lines <- inputStream.readlines
   let grid : Array (Array Char) :=
     (lines.map fun line => line.data.toArray).toArray
-  IO.println s!"{solve grid}"
+  IO.println s!"{solveParts grid}"
