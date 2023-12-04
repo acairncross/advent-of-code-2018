@@ -29,6 +29,17 @@ def toInt! (c : Char) : Int :=
 
 end Char
 
+namespace String
+
+def strip (s : String) (toDelete : Array Char) : String := Id.run do
+  let mut result := ""
+  for c in s.data do
+    unless toDelete.contains c do
+      result := result.push c
+  return result
+
+end String
+
 namespace Int
 
 def sum (l : List Int) : Int := l.foldr (·+·) 0
